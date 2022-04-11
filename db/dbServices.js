@@ -8,6 +8,7 @@ const connection = mysql.createConnection({
   password: process.env.PASSWORD,
   port: process.env.DB_PORT,
   database: process.env.DATABASE,
+  multipleStatements: true,
 });
 
 connection.connect((err) => {
@@ -39,24 +40,50 @@ class DbServices {
   }
   async registerRenter(data) {
     console.log(data);
+    const {
+      f_name,
+      l_name,
+      phone_num,
+      email,
+      num_of_family,
+      job_type,
+      address,
+      marital_status,
+      gender,
+    } = data;
     try {
       const response = await new Promise((resolve, reject) => {
-        const query =
-          "INSERT INTO renters (name, username, pass_word, date_added) VALUES(?,?,?,?)";
-        connection.query(
-          query,
-          [data.name, data.username, data.password, data.date],
-          (err, result) => {
-            if (err) reject(new Error(err.message));
-            resolve(result);
-          }
-        );
+        const query = ` INSERT INTO users(user_name, pass_word, user_role) VALUES('${data.user_name}', '${data.pass_word}', 'renter'); INSERT INTO renters(f_name, l_name, phone_num, email, telegram, num_of_family, job_type, address, marital_status, gender, age, u_id) VALUES('${f_name}','${l_name}','${phone_num}','${email}','dachbi', '${num_of_family}', '${job_type}', '${address}','${marital_status}', '${gender}', '1', LAST_INSERT_ID())`;
+        connection.query(query, (err, result) => {
+          if (err) reject(new Error(err.message));
+          resolve(result);
+        });
       });
       return response;
     } catch (error) {
       console.log(error);
     }
   }
+  // async registerRenter(data) {
+  //   console.log(data);
+  //   try {
+  //     const response = await new Promise((resolve, reject) => {
+  //       const query =
+  //         "INSERT INTO renters (name, username, pass_word, date_added) VALUES(?,?,?,?)";
+  //       connection.query(
+  //         query,
+  //         [data.name, data.username, data.password, data.date],
+  //         (err, result) => {
+  //           if (err) reject(new Error(err.message));
+  //           resolve(result);
+  //         }
+  //       );
+  //     });
+  //     return response;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
   async insertNewName(name) {
     try {
       const dateAdded = new Date();
@@ -73,6 +100,22 @@ class DbServices {
       return insertId;
     } catch (err) {
       console.log(err);
+    }
+  }
+  async findUser(user_name) {
+    //WHERE 'test2.user_name' = '${user_name}'
+    try {
+      const response = new Promise((resolve, reject) => {
+        const query = `SELECT * FROM users WHERE user_name = '${user_name}'`;
+        connection.query(query, (err, result) => {
+          if (err) reject(new Error(err.message));
+          resolve(result);
+        });
+      });
+
+      return response;
+    } catch (error) {
+      console.log(error);
     }
   }
   async delete(id) {

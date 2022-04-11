@@ -7,10 +7,10 @@ const registerRenter = async (req, res) => {
   //console.log("register (renter) controller is working");
   //res.send("<h2>welcome to the register renter page wow!!!!<h2>");
   console.log({ reqBody: req.body });
-  const { username, password: plainPassword } = req.body;
-  const date = new Date();
-  const password = await bcrypt.hash(plainPassword, 5);
-  const data = { name: "dagim", username, password, date };
+  const { pass_word: plainPassword } = req.body;
+
+  const pass_word = await bcrypt.hash(plainPassword, 5);
+  const data = { ...req.body, pass_word };
   const db = dbServices.getDbServiceInstance();
   const result = db.registerRenter(data);
 
