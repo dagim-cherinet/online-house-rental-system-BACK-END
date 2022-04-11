@@ -26,7 +26,11 @@ const login = async (req, res) => {
           },
           JWT_STRING
         );
-        return res.json({ status: "ok", data: token });
+        return res.json({
+          status: "ok",
+          user_role: user[0].user_role,
+          data: token,
+        });
       }
       res.json({ status: "error", error: "invalid username/password" });
     })
