@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { reject } = require("bcrypt/promises");
+//const { reject } = require("bcrypt/promises");
 const mysql = require("mysql");
 let instance = null;
 const connection = mysql.createConnection({
@@ -41,6 +41,8 @@ class DbServices {
   async registerRenter(data) {
     console.log(data);
     const {
+      user_name,
+      pass_word,
       f_name,
       l_name,
       phone_num,
@@ -53,7 +55,7 @@ class DbServices {
     } = data;
     try {
       const response = await new Promise((resolve, reject) => {
-        const query = ` INSERT INTO users(user_name, pass_word, user_role) VALUES('${data.user_name}', '${data.pass_word}', 'renter'); INSERT INTO renters(f_name, l_name, phone_num, email, telegram, num_of_family, job_type, address, marital_status, gender, age, u_id) VALUES('${f_name}','${l_name}','${phone_num}','${email}','dachbi', '${num_of_family}', '${job_type}', '${address}','${marital_status}', '${gender}', '1', LAST_INSERT_ID())`;
+        const query = ` INSERT INTO users(user_name, pass_word, user_role) VALUES('${user_name}', '${pass_word}', 'renter'); INSERT INTO renters(f_name, l_name, phone_num, email, telegram, num_of_family, job_type, address, marital_status, gender, age, u_id) VALUES('${f_name}','${l_name}','${phone_num}','${email}','dachbi', '${num_of_family}', '${job_type}', '${address}','${marital_status}', '${gender}', '1', LAST_INSERT_ID())`;
         connection.query(query, (err, result) => {
           if (err) reject(new Error(err.message));
           resolve(result);
@@ -64,26 +66,62 @@ class DbServices {
       console.log(error);
     }
   }
-  // async registerRenter(data) {
-  //   console.log(data);
-  //   try {
-  //     const response = await new Promise((resolve, reject) => {
-  //       const query =
-  //         "INSERT INTO renters (name, username, pass_word, date_added) VALUES(?,?,?,?)";
-  //       connection.query(
-  //         query,
-  //         [data.name, data.username, data.password, data.date],
-  //         (err, result) => {
-  //           if (err) reject(new Error(err.message));
-  //           resolve(result);
-  //         }
-  //       );
-  //     });
-  //     return response;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+  async registerOwner(data) {
+    console.log(data);
+    const { user_name, pass_word, f_name, l_name, phone_num, email, telegram } =
+      data;
+    try {
+      const response = await new Promise((resolve, reject) => {
+        const query = ` INSERT INTO users(user_name, pass_word, user_role) VALUES('${user_name}', '${pass_word}', 'owner'); INSERT INTO house_owners(f_name, l_name, phone_num, email, telegram, u_id) VALUES('${f_name}','${l_name}','${phone_num}','${email}','${telegram}', LAST_INSERT_ID())`;
+        connection.query(query, (err, result) => {
+          if (err) reject(new Error(err.message));
+          resolve(result);
+        });
+      });
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async postHouseToDB(house_detail) {
+    const {
+      house_type: h_type,
+      kebele,
+      city,
+      rent_fee,
+      number_of_rooms,
+      image_src,
+      o_id,
+    } = house_detail;
+    try {
+      //I can say response but i am expecting insert ID
+      const response = await new Promise((resolve, reject) => {
+        const query =
+          "INSERT INTO houses(h_type, kebele, city, rent_fee, number_of_rooms, image_src, h_status, o_id)VALUES(?,?,?,?,?,?,?,?)";
+        connection.query(
+          query,
+          [
+            h_type,
+            kebele,
+            city,
+            rent_fee,
+            number_of_rooms,
+            image_src,
+            "unrented",
+            o_id,
+          ],
+          (err, result) => {
+            if (err) reject(new Error(err.message));
+            resolve(result);
+          }
+        );
+      });
+      //  console.log(insertId);
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
+  }
   async insertNewName(name) {
     try {
       const dateAdded = new Date();
