@@ -22,10 +22,10 @@ class DbServices {
   static getDbServiceInstance() {
     return instance ? instance : new DbServices();
   }
-  async getAllData() {
+  async getAllHouses() {
     try {
       const response = await new Promise((resolve, reject) => {
-        const query = "SELECT * FROM names";
+        const query = "SELECT * FROM houses";
 
         connection.query(query, (err, results) => {
           if (err) reject(new Error(err.message));
@@ -92,18 +92,22 @@ class DbServices {
       number_of_rooms,
       image_src,
       o_id,
+      area,
+      catagory,
     } = house_detail;
     try {
       //I can say response but i am expecting insert ID
       const response = await new Promise((resolve, reject) => {
         const query =
-          "INSERT INTO houses(h_type, kebele, city, rent_fee, number_of_rooms, image_src, h_status, o_id)VALUES(?,?,?,?,?,?,?,?)";
+          "INSERT INTO houses(h_type, kebele, city, catagory, area, rent_fee, number_of_rooms, image_src, h_status, o_id)VALUES(?,?,?,?,?,?,?,?,?,?)";
         connection.query(
           query,
           [
             h_type,
             kebele,
             city,
+            catagory,
+            area,
             rent_fee,
             number_of_rooms,
             image_src,
