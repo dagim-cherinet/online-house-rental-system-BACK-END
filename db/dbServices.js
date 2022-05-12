@@ -1,4 +1,5 @@
 require("dotenv").config();
+const { reject } = require("bcrypt/promises");
 //const { reject } = require("bcrypt/promises");
 const mysql = require("mysql");
 let instance = null;
@@ -33,6 +34,34 @@ class DbServices {
         });
       });
       //  console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async ownersHouse(o_id) {
+    try {
+      const response = await new Promise((resolve, reject) => {
+        const query = `SELECT * FROM houses WHERE o_id = ${o_id}`;
+        connection.query(query, (err, results) => {
+          if (err) reject(new Error(err.message));
+          resolve(results);
+        });
+      });
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async oneHouse(id) {
+    try {
+      const response = await new Promise((resolve, reject) => {
+        const query = `SELECT * FROM houses WHERE id= ${id}`;
+        connection.query(query, (err, results) => {
+          if (err) reject(new Error(err.message));
+          resolve(results);
+        });
+      });
       return response;
     } catch (error) {
       console.log(error);
@@ -119,6 +148,41 @@ class DbServices {
             resolve(result);
           }
         );
+      });
+      //  console.log(insertId);
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  async searchHouse(parameter, value) {
+    //console.log(parameter, value);
+
+    try {
+      const response = await new Promise((resolve, reject) => {
+        const query =
+          parameter == "rent_fee"
+            ? `SELECT * FROM houses WHERE ${parameter} <= '${value}'`
+            : `SELECT * FROM houses WHERE ${parameter} = '${value}'`;
+        connection.query(query, (err, result) => {
+          if (err) reject(new Error(err.message));
+          resolve(result);
+        });
+      });
+      //  console.log(insertId);
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  async changePassword(id, newPassword) {
+    try {
+      const response = await new Promise((resolve, reject) => {
+        const query = `UPDATE users SET pass_word = '${newPassword}' WHERE id = '${id}' `;
+        connection.query(query, (err, result) => {
+          if (err) reject(new Error(err.message));
+          resolve(result);
+        });
       });
       //  console.log(insertId);
       return response;
