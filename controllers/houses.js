@@ -17,9 +17,9 @@ const ownersHouse = async (req, res) => {
   console.log(token);
 
   const owner = jwt.verify(token, JWT_STRING);
-  const o_id = owner.id;
+  const u_id = owner.id;
   const db = dbServices.getDbServiceInstance();
-  const response = db.ownersHouse(o_id);
+  const response = db.ownersHouse(u_id);
   response
     .then((data) => {
       console.log(data);

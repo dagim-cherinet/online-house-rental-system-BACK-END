@@ -6,6 +6,7 @@ const { login } = require("../controllers/login");
 const { allHouses, ownersHouse, oneHouse } = require("../controllers/houses");
 const { search } = require("../controllers/search");
 const { changePassword } = require("../controllers/change_password");
+const { sendRequest } = require("../controllers/send_request");
 const router = express.Router();
 
 router.route("/registerRenter").post(registerRenter);
@@ -16,6 +17,7 @@ router.route("/ownersHouse/:token").get(ownersHouse);
 router.route("/house/:id").get(oneHouse);
 router.route("/search").post(search);
 router.route("/change-password").post(changePassword);
+router.route("/sendRequest").post(sendRequest);
 //router.route("/postHouse").post(upload.single("image"), postHouse);
 
 router

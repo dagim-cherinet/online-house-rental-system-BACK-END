@@ -21,10 +21,10 @@ var upload = multer({
 });
 
 const postHouse = async (req, res) => {
-  console.log({ ...req.body });
-  console.log(req.params);
+  //console.log({ ...req.body });
+  //console.log(req.params);
   const { token } = req.body;
-  console.log(token);
+  //console.log(token);
   const user = jwt.verify(token, JWT_STRING);
   const o_id = user.id;
   console.log(o_id);

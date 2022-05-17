@@ -39,10 +39,10 @@ class DbServices {
       console.log(error);
     }
   }
-  async ownersHouse(o_id) {
+  async ownersHouse(u_id) {
     try {
       const response = await new Promise((resolve, reject) => {
-        const query = `SELECT * FROM houses WHERE o_id = ${o_id}`;
+        const query = `SELECT * FROM houses WHERE o_id = (SELECT id FROM house_owners WHERE u_id = '${u_id}')`;
         connection.query(query, (err, results) => {
           if (err) reject(new Error(err.message));
           resolve(results);
@@ -127,27 +127,11 @@ class DbServices {
     try {
       //I can say response but i am expecting insert ID
       const response = await new Promise((resolve, reject) => {
-        const query =
-          "INSERT INTO houses(h_type, kebele, city, catagory, area, rent_fee, number_of_rooms, image_src, h_status, o_id)VALUES(?,?,?,?,?,?,?,?,?,?)";
-        connection.query(
-          query,
-          [
-            h_type,
-            kebele,
-            city,
-            catagory,
-            area,
-            rent_fee,
-            number_of_rooms,
-            image_src,
-            "unrented",
-            o_id,
-          ],
-          (err, result) => {
-            if (err) reject(new Error(err.message));
-            resolve(result);
-          }
-        );
+        const query = `INSERT INTO houses(h_type, kebele, city, catagory, area, rent_fee, number_of_rooms, image_src, h_status, o_id)VALUES('${h_type}','${kebele}','${city}','${catagory}','${area}','${rent_fee}','${number_of_rooms}','${image_src}', 'unrented', (SELECT id FROM house_owners WHERE u_id = '${o_id}'))`;
+        connection.query(query, (err, result) => {
+          if (err) reject(new Error(err.message));
+          resolve(result);
+        });
       });
       //  console.log(insertId);
       return response;
@@ -185,6 +169,25 @@ class DbServices {
         });
       });
       //  console.log(insertId);
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  async sendRequest(data) {
+    try {
+      const response = await new Promise((resolve, reject) => {
+        const query = `INSERT INTO request_table (renter_id, owner_id, house_id, req_date) VALUES(?,?,?)`;
+        connection.query(
+          query,
+          [data.r_id, data.h_id, data.o_id, data.req_date],
+          (err, result) => {
+            if (err) reject(new Error(err.message));
+            resolve(result);
+          }
+        );
+      });
+
       return response;
     } catch (err) {
       console.log(err);
