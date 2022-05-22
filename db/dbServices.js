@@ -123,11 +123,13 @@ class DbServices {
       o_id,
       area,
       catagory,
+      sub_city,
+      area_name,
     } = house_detail;
     try {
       //I can say response but i am expecting insert ID
       const response = await new Promise((resolve, reject) => {
-        const query = `INSERT INTO houses(h_type, kebele, city, catagory, area, rent_fee, number_of_rooms, image_src, h_status, o_id)VALUES('${h_type}','${kebele}','${city}','${catagory}','${area}','${rent_fee}','${number_of_rooms}','${image_src}', 'unrented', (SELECT id FROM house_owners WHERE u_id = '${o_id}'))`;
+        const query = `INSERT INTO houses(h_type, kebele, city, sub_city, area_name, catagory, area, rent_fee, number_of_rooms, image_src, h_status, o_id)VALUES('${h_type}','${kebele}','${city}','${sub_city}','${area_name}' ,'${catagory}','${area}','${rent_fee}','${number_of_rooms}','${image_src}', 'unrented', (SELECT id FROM house_owners WHERE u_id = '${o_id}'))`;
         connection.query(query, (err, result) => {
           if (err) reject(new Error(err.message));
           resolve(result);
@@ -177,15 +179,30 @@ class DbServices {
   async sendRequest(data) {
     try {
       const response = await new Promise((resolve, reject) => {
-        const query = `INSERT INTO request_table (renter_id, owner_id, house_id, req_date) VALUES(?,?,?)`;
+        const query = `INSERT INTO request_table (renter_id, owner_id, house_id, req_date, req_status) VALUES(?,?,?,?,?)`;
         connection.query(
           query,
-          [data.r_id, data.h_id, data.o_id, data.req_date],
+          [data.r_id, data.o_id, data.h_id, data.req_date, data.req_status],
           (err, result) => {
             if (err) reject(new Error(err.message));
             resolve(result);
           }
         );
+      });
+
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  async deleteRequest(house_id) {
+    try {
+      const response = await new Promise((resolve, reject) => {
+        const query = `DELETE FROM request_table WHERE house_id = (?)`;
+        connection.query(query, [house_id], (err, result) => {
+          if (err) reject(new Error(err.message));
+          resolve(result);
+        });
       });
 
       return response;
