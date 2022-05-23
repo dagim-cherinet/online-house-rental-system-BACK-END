@@ -67,6 +67,20 @@ class DbServices {
       console.log(error);
     }
   }
+  async checkHouse(u_id, h_id) {
+    try {
+      const response = await new Promise((resolve, reject) => {
+        const query = `SELECT * FROM request_table WHERE renter_id = (SELECT id from renters WHERE u_id = '${u_id}' AND house_id = '${h_id}')`;
+        connection.query(query, (err, results) => {
+          if (err) reject(new Error(err.message));
+          resolve(results);
+        });
+      });
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
   async registerRenter(data) {
     console.log(data);
     const {

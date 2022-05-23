@@ -37,4 +37,15 @@ const oneHouse = async (req, res) => {
     res.json({ status: "request successful", data: data });
   });
 };
-module.exports = { allHouses, ownersHouse, oneHouse };
+const checkHouse = async (req, res) => {
+  const { h_id, token } = req.body;
+  const renter = jwt.verify(token, JWT_STRING);
+  const u_id = renter.id;
+  const db = dbServices.getDbServiceInstance();
+  const response = db.checkHouse(u_id, h_id);
+  response.then((data) => {
+    console.log(data);
+    res.json({ status: "check completed", data: data });
+  });
+};
+module.exports = { allHouses, ownersHouse, oneHouse, checkHouse };

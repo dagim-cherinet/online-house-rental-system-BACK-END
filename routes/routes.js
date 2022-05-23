@@ -3,7 +3,12 @@ const bcrypt = require("bcrypt");
 const { upload, postHouse } = require("../controllers/post_house");
 const { registerRenter, registerOwner } = require("../controllers/register");
 const { login } = require("../controllers/login");
-const { allHouses, ownersHouse, oneHouse } = require("../controllers/houses");
+const {
+  allHouses,
+  ownersHouse,
+  oneHouse,
+  checkHouse,
+} = require("../controllers/houses");
 const { search } = require("../controllers/search");
 const { changePassword } = require("../controllers/change_password");
 const { sendRequest, deleteRequest } = require("../controllers/request");
@@ -19,6 +24,7 @@ router.route("/search").post(search);
 router.route("/change-password").post(changePassword);
 router.route("/sendRequest").post(sendRequest);
 router.route("/deleteRequest/:id").delete(deleteRequest);
+router.route("/checkHouse").post(checkHouse);
 //router.route("/postHouse").post(upload.single("image"), postHouse);
 
 router
