@@ -3,9 +3,9 @@ const JWT_STRING = "kfkjfkjfdkjakdjferuej#$#$#2u3@#@$@kfj";
 const dbServices = require("../db/dbServices");
 const sendRequest = async (req, res) => {
   const { token, h_id, o_id } = req.body;
-  const r_id = jwt.verify(token, JWT_STRING).id;
+  const u_id = jwt.verify(token, JWT_STRING).id;
   const req_date = new Date();
-  const data = { r_id, o_id, h_id, req_date, req_status: "sent" };
+  const data = { u_id, o_id, h_id, req_date, req_status: "sent" };
   //console.log(data);
   //res.json({ status: "request sent successfully", data: data });
   const db = dbServices.getDbServiceInstance();
@@ -30,4 +30,17 @@ const deleteRequest = async (req, res) => {
     })
     .catch((err) => console.log(err));
 };
-module.exports = { sendRequest, deleteRequest };
+const ownerRequests = async (req, res) => {
+  const { token } = req.body;
+  const u_id = jwt.verify(token, JWT_STRING).id;
+  //res.json({ status: "request sent successfully", data: data });
+  const db = dbServices.getDbServiceInstance();
+  const response = db.ownerRequests(u_id);
+  response
+    .then((data) => {
+      // console.log(data);
+      res.json({ status: "request successfully", data: data });
+    })
+    .catch((err) => console.log(err));
+};
+module.exports = { sendRequest, deleteRequest, ownerRequests };

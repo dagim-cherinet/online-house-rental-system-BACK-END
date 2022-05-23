@@ -98,7 +98,7 @@ class DbServices {
     } = data;
     try {
       const response = await new Promise((resolve, reject) => {
-        const query = ` INSERT INTO users(user_name, pass_word, user_role) VALUES('${user_name}', '${pass_word}', 'renter'); INSERT INTO renters(f_name, l_name, phone_num, email, telegram, num_of_family, job_type, address, marital_status, gender, age, u_id) VALUES('${f_name}','${l_name}','${phone_num}','${email}','dachbi', '${num_of_family}', '${job_type}', '${address}','${marital_status}', '${gender}', '1', LAST_INSERT_ID())`;
+        const query = ` INSERT INTO users(user_name, pass_word, user_role) VALUES('${user_name}', '${pass_word}', 'renter'); INSERT INTO renters(f_name, l_name, phone_num, email, telegram, num_of_family, job_type, address, marital_status, gender, age, u_id) VALUES('${f_name}','${l_name}','${phone_num}','${email}','telegram', '${num_of_family}', '${job_type}', '${address}','${marital_status}', '${gender}', '1', LAST_INSERT_ID())`;
         connection.query(query, (err, result) => {
           if (err) reject(new Error(err.message));
           resolve(result);
@@ -191,17 +191,30 @@ class DbServices {
     }
   }
   async sendRequest(data) {
+    const { u_id, o_id, h_id, req_date, req_status } = data;
     try {
       const response = await new Promise((resolve, reject) => {
-        const query = `INSERT INTO request_table (renter_id, owner_id, house_id, req_date, req_status) VALUES(?,?,?,?,?)`;
-        connection.query(
-          query,
-          [data.r_id, data.o_id, data.h_id, data.req_date, data.req_status],
-          (err, result) => {
-            if (err) reject(new Error(err.message));
-            resolve(result);
-          }
-        );
+        const query = `INSERT INTO request_table (renter_id, owner_id, house_id, req_date, req_status) VALUES((SELECT id FROM renters WHERE u_id = '${u_id}'),'${o_id}','${h_id}',?,'${req_status}')`;
+        connection.query(query, [req_date], (err, result) => {
+          if (err) reject(new Error(err.message));
+          resolve(result);
+        });
+      });
+
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  async ownerRequests(u_id) {
+    try {
+      const response = await new Promise((resolve, reject) => {
+        // const query = `SELECT * FROM request_table WHERE owner_id = (SELECT id FROM house_owners WHERE u_id = '${u_id}')`;
+        const query = `SELECT * FROM renters INNER JOIN request_table ON renters.id = request_table.renter_id WHERE owner_id = (SELECT id FROM house_owners WHERE u_id = '${u_id}')`;
+        connection.query(query, (err, result) => {
+          if (err) reject(new Error(err.message));
+          resolve(result);
+        });
       });
 
       return response;

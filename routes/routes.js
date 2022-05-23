@@ -11,7 +11,12 @@ const {
 } = require("../controllers/houses");
 const { search } = require("../controllers/search");
 const { changePassword } = require("../controllers/change_password");
-const { sendRequest, deleteRequest } = require("../controllers/request");
+const {
+  sendRequest,
+  deleteRequest,
+  ownerRequests,
+} = require("../controllers/request");
+const { route } = require("express/lib/application");
 const router = express.Router();
 
 router.route("/registerRenter").post(registerRenter);
@@ -25,6 +30,7 @@ router.route("/change-password").post(changePassword);
 router.route("/sendRequest").post(sendRequest);
 router.route("/deleteRequest/:id").delete(deleteRequest);
 router.route("/checkHouse").post(checkHouse);
+router.route("/ownerRequests").post(ownerRequests);
 //router.route("/postHouse").post(upload.single("image"), postHouse);
 
 router
