@@ -126,6 +126,23 @@ class DbServices {
       console.log(error);
     }
   }
+  async registerAdmin(data) {
+    console.log(data);
+    const { user_name, pass_word, f_name, l_name, phone_num, email, telegram } =
+      data;
+    try {
+      const response = await new Promise((resolve, reject) => {
+        const query = ` INSERT INTO users(user_name, pass_word, user_role) VALUES('${user_name}', '${pass_word}', 'admin'); INSERT INTO admins(f_name, l_name, phone_num, email, telegram, u_id) VALUES('${f_name}','${l_name}','${phone_num}','${email}','${telegram}', LAST_INSERT_ID())`;
+        connection.query(query, (err, result) => {
+          if (err) reject(new Error(err.message));
+          resolve(result);
+        });
+      });
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
   async postHouseToDB(house_detail) {
     const {
       house_type: h_type,
@@ -222,6 +239,22 @@ class DbServices {
       console.log(err);
     }
   }
+  async renterRequests(u_id) {
+    try {
+      const response = await new Promise((resolve, reject) => {
+        // const query = `SELECT * FROM request_table WHERE owner_id = (SELECT id FROM house_owners WHERE u_id = '${u_id}')`;
+        const query = `SELECT * FROM houses INNER JOIN request_table ON houses.id = request_table.house_id WHERE renter_id = (SELECT id FROM renters WHERE u_id = '${u_id}')`;
+        connection.query(query, (err, result) => {
+          if (err) reject(new Error(err.message));
+          resolve(result);
+        });
+      });
+
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
+  }
   async deleteRequest(house_id) {
     try {
       const response = await new Promise((resolve, reject) => {
@@ -237,6 +270,22 @@ class DbServices {
       console.log(err);
     }
   }
+  async accept_rejectRequests(req_id, status) {
+    try {
+      const response = await new Promise((resolve, reject) => {
+        const query = `UPDATE request_table SET req_status = '${status}' WHERE req_id = '${req_id}'`;
+        connection.query(query, (err, result) => {
+          if (err) reject(new Error(err.message));
+          resolve(result);
+        });
+      });
+
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   async insertNewName(name) {
     try {
       const dateAdded = new Date();
@@ -260,6 +309,22 @@ class DbServices {
     try {
       const response = new Promise((resolve, reject) => {
         const query = `SELECT * FROM users WHERE user_name = '${user_name}'`;
+        connection.query(query, (err, result) => {
+          if (err) reject(new Error(err.message));
+          resolve(result);
+        });
+      });
+
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async findOwner(owner_id) {
+    //WHERE 'test2.user_name' = '${user_name}'
+    try {
+      const response = new Promise((resolve, reject) => {
+        const query = `SELECT * FROM house_owners WHERE id = '${owner_id}'`;
         connection.query(query, (err, result) => {
           if (err) reject(new Error(err.message));
           resolve(result);

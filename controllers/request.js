@@ -43,4 +43,36 @@ const ownerRequests = async (req, res) => {
     })
     .catch((err) => console.log(err));
 };
-module.exports = { sendRequest, deleteRequest, ownerRequests };
+const renterRequests = async (req, res) => {
+  const { token } = req.body;
+  const u_id = jwt.verify(token, JWT_STRING).id;
+  //res.json({ status: "request sent successfully", data: data });
+  const db = dbServices.getDbServiceInstance();
+  const response = db.renterRequests(u_id);
+  response
+    .then((data) => {
+      // console.log(data);
+      res.json({ status: "request successfully", data: data });
+    })
+    .catch((err) => console.log(err));
+};
+const accept_reject = async (req, res) => {
+  const { req_id, status } = req.body;
+  console.log(req_id, status);
+  //res.json({ status: "request sent successfully", data: data });
+  const db = dbServices.getDbServiceInstance();
+  const response = db.accept_rejectRequests(req_id, status);
+  response
+    .then((data) => {
+      // console.log(data);
+      res.json({ status: `request is ${status}`, data: data });
+    })
+    .catch((err) => console.log(err));
+};
+module.exports = {
+  sendRequest,
+  deleteRequest,
+  ownerRequests,
+  renterRequests,
+  accept_reject,
+};

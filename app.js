@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 5000;
 
 // middleware
 app.use("/api/images", express.static("./public/images"));
+//app.use("/", express.static("./front_end"));
 app.use(express.json());
 app.use(cors());
 //routes
