@@ -1,20 +1,31 @@
-const jwt = require("jsonwebtoken");
-const JWT_STRING = "kfkjfkjfdkjakdjferuej#$#$#2u3@#@$@kfj";
 const dbServices = require("../db/dbServices");
-const uploadAgreement = async (req, res) => {
-  const { token, h_id, o_id } = req.body;
-  const u_id = jwt.verify(token, JWT_STRING).id;
-  const req_date = new Date();
-  const data = { u_id, o_id, h_id, req_date, req_status: "sent" };
-  //console.log(data);
-  //res.json({ status: "request sent successfully", data: data });
+const confirmAgreement = async (req, res) => {
+  const agree_id = req.params.agree_id;
   const db = dbServices.getDbServiceInstance();
-  const response = db.sendRequest(data);
-  response
-    .then((data) => {
-      console.log(data);
-      res.json({ status: "request successfully sent" });
-    })
-    .catch((err) => console.log(err));
+  const response = db.confirmAgreement(agree_id);
+  response.then((data) => {
+    console.log(data);
+    res.json({ status: "Agreement completed successfully", data: data });
+  });
 };
-module.exports = { uploadAgreement };
+const getAgreement = async (req, res) => {
+  const req_id = req.params.req_id;
+  console.log(req_id);
+  const db = dbServices.getDbServiceInstance();
+  const response = db.getAgreement(req_id);
+  response.then((data) => {
+    console.log(data);
+    res.json({ status: "agreement sent successfully", data: data });
+  });
+};
+const renterAgreement = async (req, res) => {
+  const renter_id = req.params.renter_id;
+  console.log(renter_id);
+  const db = dbServices.getDbServiceInstance();
+  const response = db.renterAgreement(renter_id);
+  response.then((data) => {
+    console.log(data);
+    res.json({ status: "agreement sent successfully", data: data });
+  });
+};
+module.exports = { confirmAgreement, getAgreement, renterAgreement };

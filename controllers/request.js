@@ -69,10 +69,21 @@ const accept_reject = async (req, res) => {
     })
     .catch((err) => console.log(err));
 };
+const allRequests = async (req, res) => {
+  const db = dbServices.getDbServiceInstance();
+  const response = db.allRequests();
+  response
+    .then((data) => {
+      // console.log(data);
+      res.json({ status: "request successfully", data: data });
+    })
+    .catch((err) => console.log(err));
+};
 module.exports = {
   sendRequest,
   deleteRequest,
   ownerRequests,
   renterRequests,
   accept_reject,
+  allRequests,
 };
