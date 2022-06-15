@@ -4,6 +4,7 @@ const {
   confirmAgreement,
   getAgreement,
   renterAgreement,
+  ownerAgreement,
 } = require("../controllers/agreement");
 const {
   upload,
@@ -51,8 +52,10 @@ router.route("/registerOwner").post(registerOwner);
 router.route("/registerAdmin").post(registerAdmin);
 router.route("/login").post(login);
 router.route("/allHouses").get(allHouses);
+//
 router.route("/ownersHouse/:token").get(ownersHouse);
 router.route("/rentersHouse/:token").get(rentersHouse);
+//
 router.route("/house/:id").get(oneHouse);
 router.route("/search").post(search);
 router.route("/change-password").post(changePassword);
@@ -66,7 +69,9 @@ router.route("/renter/:renter_id").get(findRenter);
 router.route("/renterRequests").post(renterRequests);
 router.route("/agreement/:req_id").get(getAgreement);
 router.route("/confirmAgreement/:agree_id").get(confirmAgreement);
+//
 router.route("/renterAgreement/:renter_id").get(renterAgreement);
+router.route("/ownerAgreement/:owner_id").get(ownerAgreement);
 router.route("/changeHouseStatus").post(changeHouseStatus);
 router.route("/allRenters").get(getAllRenters);
 //

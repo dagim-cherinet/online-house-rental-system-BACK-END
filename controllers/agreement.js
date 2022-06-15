@@ -28,4 +28,19 @@ const renterAgreement = async (req, res) => {
     res.json({ status: "agreement sent successfully", data: data });
   });
 };
-module.exports = { confirmAgreement, getAgreement, renterAgreement };
+const ownerAgreement = async (req, res) => {
+  const owner_id = req.params.owner_id;
+  // console.log(owner_id);
+  const db = dbServices.getDbServiceInstance();
+  const response = db.ownerAgreement(owner_id);
+  response.then((data) => {
+    console.log(data);
+    res.json({ status: "agreement sent successfully", data: data });
+  });
+};
+module.exports = {
+  confirmAgreement,
+  getAgreement,
+  renterAgreement,
+  ownerAgreement,
+};

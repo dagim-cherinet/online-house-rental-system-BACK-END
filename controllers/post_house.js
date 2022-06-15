@@ -39,6 +39,7 @@ const postHouse = async (req, res) => {
   // var imgsrc = "http://localhost:5000/api/images/" + req.files.image[0].filename;
   var image_src = `${req.files.image[0].filename}`;
   var house_detail = { ...req.body, image_src, o_id };
+  //console.log(house_detail);
   const db = dbServices.getDbServiceInstance();
   const response = db.postHouseToDB(house_detail);
   response

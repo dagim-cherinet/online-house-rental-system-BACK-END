@@ -67,6 +67,7 @@ class DbServices {
       console.log(error);
     }
   }
+
   async oneHouse(id) {
     try {
       const response = await new Promise((resolve, reject) => {
@@ -191,6 +192,7 @@ class DbServices {
       city,
       rent_fee,
       number_of_rooms,
+      furniture,
       image_src,
       o_id,
       area,
@@ -201,7 +203,7 @@ class DbServices {
     try {
       //I can say response but i am expecting insert ID
       const response = await new Promise((resolve, reject) => {
-        const query = `INSERT INTO houses(h_type, kebele, city, sub_city, area_name, catagory, area, rent_fee, number_of_rooms, image_src, h_status, o_id)VALUES('${h_type}','${kebele}','${city}','${sub_city}','${area_name}' ,'${catagory}','${area}','${rent_fee}','${number_of_rooms}','${image_src}', 'unrented', (SELECT id FROM house_owners WHERE u_id = '${o_id}'))`;
+        const query = `INSERT INTO houses(h_type, kebele, city, sub_city, area_name, catagory, area, rent_fee, number_of_rooms, furniture, image_src, h_status, o_id)VALUES('${h_type}','${kebele}','${city}','${sub_city}','${area_name}' ,'${catagory}','${area}','${rent_fee}','${number_of_rooms}', '${furniture}','${image_src}', 'unrented', (SELECT id FROM house_owners WHERE u_id = '${o_id}'))`;
         connection.query(query, (err, result) => {
           if (err) reject(new Error(err.message));
           resolve(result);
@@ -290,6 +292,26 @@ class DbServices {
       console.log(err);
     }
   }
+  async ownerAgreement(owner_id) {
+    try {
+      //I can say response but i am expecting insert ID
+      const response = await new Promise((resolve, reject) => {
+        const query = `SELECT * FROM agreement INNER JOIN request_table ON agreement.request_id = request_table.req_id WHERE request_table.owner_id ='${owner_id}' `;
+        connection.query(
+          query,
+
+          (err, result) => {
+            if (err) reject(new Error(err.message));
+            resolve(result);
+          }
+        );
+      });
+      //  console.log(insertId);
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
+  }
   async searchHouse(parameter, value) {
     //console.log(parameter, value);
 
@@ -345,7 +367,8 @@ class DbServices {
     try {
       const response = await new Promise((resolve, reject) => {
         // const query = `SELECT * FROM request_table WHERE owner_id = (SELECT id FROM house_owners WHERE u_id = '${u_id}')`;
-        const query = `SELECT * FROM renters INNER JOIN request_table ON renters.id = request_table.renter_id WHERE owner_id = (SELECT id FROM house_owners WHERE u_id = '${u_id}')`;
+        // const query = `SELECT * FROM renters INNER JOIN request_table ON renters.id = request_table.renter_id WHERE owner_id = (SELECT id FROM house_owners WHERE u_id = '${u_id}')`;
+        const query = `SELECT * FROM renters INNER JOIN request_table ON renters.id = request_table.renter_id INNER JOIN houses ON  houses.id = request_table.house_id WHERE owner_id = (SELECT id FROM house_owners WHERE u_id = '${u_id}')`;
         connection.query(query, (err, result) => {
           if (err) reject(new Error(err.message));
           resolve(result);
@@ -521,6 +544,7 @@ class DbServices {
   }
   async removeRenter(renter_id) {
     //WHERE 'test2.user_name' = '${user_name}'
+    // change house status to unrented whenever a renter got deleted
     try {
       const response = new Promise((resolve, reject) => {
         // const query = `SELECT * FROM users INNER JOIN renters ON users.id = renters.u_id`;
