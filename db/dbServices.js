@@ -1,23 +1,35 @@
 require("dotenv").config();
 //const { reject } = require("bcrypt/promises");
 //const { reject } = require("bcrypt/promises");
-const mysql = require("mysql");
+const mysql = require("mysql2/promise");
 let instance = null;
-const connection = mysql.createConnection({
-  host: process.env.HOST,
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  port: process.env.DB_PORT,
-  database: process.env.DATABASE,
-  multipleStatements: true,
-});
-
-connection.connect((err) => {
-  if (err) {
-    console.log(err.message);
+async function connectToDatabase() {
+  try {
+    const connection = await mysql.createConnection({
+      host: process.env.HOST,
+      user: process.env.USER,
+      password: process.env.PASSWORD,
+      port: process.env.DB_PORT,
+      database: process.env.DATABASE,
+      multipleStatements: true,
+    });
+    console.log("Connected to the database successfully!");
+    return connection;
+  } catch (error) {
+    console.error("Error connecting to the database:", error);
+    throw error;
   }
-  console.log("database is " + connection.state);
-});
+}
+
+// Call the function
+connectToDatabase()
+  .then(connection => {
+    // Use the connection here
+    // console.log(connection)
+  })
+  .catch(error => {
+    // Handle any errors
+  });
 
 class DbServices {
   static getDbServiceInstance() {
