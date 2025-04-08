@@ -7,7 +7,7 @@ const allHouses = async (req, res) => {
   const response = db.getAllHouses();
   response
     .then((data) => {
-      // console.log(data);
+      console.log(data);
       res.json({ status: "request successful", data: data });
     })
     .catch((err) => console.log(err));

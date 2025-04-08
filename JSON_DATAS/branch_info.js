@@ -1,4 +1,4 @@
-[
+const branch_info = [
   {
     "b_id": 1,
     "b_name": "Adare",
@@ -121,7 +121,7 @@
   },
   {
     "b_id": 11,
-    "b_name": "Hawassa Bahiladarash",
+    "b_name": "Hawassa Bahil Adarash",
     "connection_type": "Fiber",
     "service_no": 86100256006,
     "wan_address": "10.138.213.172",
@@ -147,9 +147,13 @@
     "b_id": 13,
     "b_name": "Bishan Guracha ",
     "connection_type": "Fiber",
-    "service_no": "944933900922",
+    "service_no": 944933900922,
     "wan_address": "10.138.205.196 ",
-    "lan_address": "10.112.251.1"
+    "lan_address": "10.112.251.1",
+    "tunnel_ip_dr_er11": "",
+    "tunnel_ip_dr_er12": "",
+    "tunnel_ip_dc_er21": "",
+    "tunnel_ip_dc_er22": ""
   },
   {
     "b_id": 14,
@@ -167,7 +171,7 @@
     "b_id": 15,
     "b_name": "Bore",
     "connection_type": "Fiber",
-    "service_no": "9990008534",
+    "service_no": 9990008534,
     "wan_address": "10.147.98.180/10.147.192.244",
     "lan_address": "10.112.21.1",
     "tunnel_ip_dr_er11": "10.220.144.33",
@@ -202,11 +206,10 @@
   },
   {
     "b_id": 18,
-    "b_name": "Bursa VSAT",
-    "connection_type": "VSAT",
-    "service_no": 9990034666,
-    "wan_address": " 172.24.0.10/10.21.0.2",
-    "default_gateway": "172.24.0.9",
+    "b_name": "Bursa",
+    "connection_type": "Fiber",
+    "service_no": 999992587899,
+    "wan_address": "10.147.216.228 VLAN 3872",
     "lan_address": "10.112.231.1",
     "tunnel_ip_dr_er11": "10.220.144.96",
     "tunnel_ip_dr_er12": "10.220.148.96",
@@ -215,14 +218,7 @@
   },
   {
     "b_id": 19,
-    "b_name": "Bursa",
-    "connection_type": "Fiber",
-    "service_no": "999992587899",
-    "wan_address": "10.147.216.228 VLAN 3872"
-  },
-  {
-    "b_id": 20,
-    "b_name": "Chirri ADSL",
+    "b_name": "Chiri",
     "connection_type": "ADSL",
     "service_no": 18100055388,
     "wan_address": "10.147.204.196 VLAN 3704",
@@ -233,20 +229,7 @@
     "tunnel_ip_dc_er22": "10.220.156.110"
   },
   {
-    "b_id": 21,
-    "b_name": "Chirri VSAT",
-    "connection_type": "VSAT",
-    "service_no": 990046830,
-    "wan_address": "172.24.0.20/10.21.126.2",
-    "default_gateway": "172.24.0.17",
-    "lan_address": "10.112.254.1",
-    "tunnel_ip_dr_er11": "10.220.144.110",
-    "tunnel_ip_dr_er12": "10.220.148.110",
-    "tunnel_ip_dc_er21": "10.220.152.110",
-    "tunnel_ip_dc_er22": "10.220.156.110"
-  },
-  {
-    "b_id": 22,
+    "b_id": 20,
     "b_name": "Daka",
     "connection_type": "Fiber",
     "service_no": 9990051435,
@@ -258,10 +241,10 @@
     "tunnel_ip_dc_er22": "10.220.156.35"
   },
   {
-    "b_id": 23,
+    "b_id": 21,
     "b_name": "Dato",
     "connection_type": "Fiber",
-    "service_no": "9990019459",
+    "service_no": 9990019459,
     "wan_address": "10.138.195.196",
     "lan_address": "10.112.28.1",
     "tunnel_ip_dr_er11": "10.220.144.37",
@@ -270,7 +253,8 @@
     "tunnel_ip_dc_er22": "10.220.156.37"
   },
   {
-    "b_name": "Daye New",
+    "b_id": 22,
+    "b_name": "Daye",
     "connection_type": "Fiber",
     "service_no": 89101229390,
     "wan_address": "10.147.98.92",
@@ -281,7 +265,7 @@
     "tunnel_ip_dc_er22": "10.220.156.39"
   },
   {
-    "b_id": 24,
+    "b_id": 23,
     "b_name": "Daye Old",
     "connection_type": "ADSL",
     "service_no": 9990019467,
@@ -293,7 +277,7 @@
     "tunnel_ip_dc_er22": "10.220.156.39"
   },
   {
-    "b_id": 25,
+    "b_id": 24,
     "b_name": "Dorebafeno",
     "connection_type": "Fiber",
     "service_no": 48100049028,
@@ -305,10 +289,10 @@
     "tunnel_ip_dc_er22": "10.220.156.69"
   },
   {
-    "b_id": 26,
+    "b_id": 25,
     "b_name": "Dume",
     "connection_type": "Fiber",
-    "service_no": "9990019460",
+    "service_no": 9990019460,
     "wan_address": "10.138.195.204",
     "lan_address": "10.112.29.1",
     "tunnel_ip_dr_er11": "10.220.144.46",
@@ -317,19 +301,11 @@
     "tunnel_ip_dc_er22": "10.220.156.46"
   },
   {
-    "b_name": "Erbamuda Tailored",
+    "b_id": 26,
+    "b_name": "Erbamuda",
     "connection_type": "Fiber",
-    "service_no": "999900888518",
+    "service_no": 999900888518,
     "wan_address": "10.147.221.44 VLAN 3364",
-    "lan_address": "10.112.223.1"
-  },
-  {
-    "b_id": 27,
-    "b_name": "Erbamuda VSAT",
-    "connection_type": "VSAT",
-    "service_no": 990046810,
-    "wan_address": "172.24.0.26/10.21.107.2",
-    "default_gateway": "172.24.0.25",
     "lan_address": "10.112.223.1",
     "tunnel_ip_dr_er11": "10.220.144.93",
     "tunnel_ip_dr_er12": "10.220.148.93",
@@ -337,7 +313,7 @@
     "tunnel_ip_dc_er22": "10.220.156.93"
   },
   {
-    "b_id": 28,
+    "b_id": 27,
     "b_name": "Filtu",
     "connection_type": "Fiber",
     "service_no": 98100041788,
@@ -349,7 +325,7 @@
     "tunnel_ip_dc_er22": "10.220.156.97"
   },
   {
-    "b_id": 29,
+    "b_id": 28,
     "b_name": "Fura",
     "connection_type": "Fiber",
     "service_no": 9990012735,
@@ -361,7 +337,7 @@
     "tunnel_ip_dc_er22": "10.220.156.47"
   },
   {
-    "b_id": 30,
+    "b_id": 29,
     "b_name": "Gafima",
     "connection_type": "Fiber",
     "service_no": 9990030005,
@@ -373,10 +349,10 @@
     "tunnel_ip_dc_er22": "10.220.156.73"
   },
   {
-    "b_id": 31,
-    "b_name": "Gebreal sefer",
+    "b_id": 30,
+    "b_name": "Gebriel Sefer",
     "connection_type": "Fiber",
-    "service_no": "999909760125/990999121",
+    "service_no": 999909760125,
     "wan_address": "10.138.195.44",
     "default_gateway": "MSG-29",
     "lan_address": "10.112.60.1",
@@ -386,7 +362,7 @@
     "tunnel_ip_dc_er22": "10.220.156.50"
   },
   {
-    "b_id": 32,
+    "b_id": 31,
     "b_name": "Gidabo",
     "connection_type": "Fiber",
     "service_no": 9990100316,
@@ -398,7 +374,7 @@
     "tunnel_ip_dc_er22": "10.220.156.70"
   },
   {
-    "b_id": 33,
+    "b_id": 32,
     "b_name": "Godguada",
     "connection_type": "Fiber",
     "service_no": 55100201625,
@@ -410,27 +386,19 @@
     "tunnel_ip_dc_er22": "10.220.156.128"
   },
   {
-    "b_id": 34,
-    "b_name": "Gorche Tailored",
+    "b_id": 33,
+    "b_name": "Gorche",
     "connection_type": "Fiber",
-    "service_no": "999900258369",
-    "wan_address": "10.138.217.100 VLAN 2003"
-  },
-  {
-    "b_id": 35,
-    "b_name": "Gorche VSAT",
-    "connection_type": "VSAT",
-    "service_no": 9990029744,
-    "wan_address": "172.24.0.35/10.21.109.2",
-    "default_gateway": "172.24.0.33",
+    "service_no": 999900258369,
     "lan_address": "10.112.238.1",
+    "wan_address": "10.138.217.100 VLAN 2003",
     "tunnel_ip_dr_er11": "10.220.144.82",
     "tunnel_ip_dr_er12": "10.220.148.82",
     "tunnel_ip_dc_er21": "10.220.152.82",
     "tunnel_ip_dc_er22": "10.220.156.82"
   },
   {
-    "b_id": 36,
+    "b_id": 34,
     "b_name": "Gudumale",
     "connection_type": "Fiber",
     "service_no": 9990100318,
@@ -442,7 +410,7 @@
     "tunnel_ip_dc_er22": "10.220.156.60"
   },
   {
-    "b_id": 37,
+    "b_id": 35,
     "b_name": "Hadokorsa",
     "connection_type": "Fiber",
     "service_no": 90100018840,
@@ -454,7 +422,7 @@
     "tunnel_ip_dc_er22": "10.220.156.81"
   },
   {
-    "b_id": 38,
+    "b_id": 36,
     "b_name": "Hamza",
     "connection_type": "Fiber",
     "service_no": 16100274556,
@@ -466,7 +434,7 @@
     "tunnel_ip_dc_er22": "10.220.156.134"
   },
   {
-    "b_id": 39,
+    "b_id": 37,
     "b_name": "Hantate",
     "connection_type": "Fiber",
     "service_no": 949400042425,
@@ -478,10 +446,10 @@
     "tunnel_ip_dc_er22": "10.220.156.48"
   },
   {
-    "b_id": 40,
-    "b_name": "Harakelo Tailored",
+    "b_id": 38,
+    "b_name": "Harakello",
     "connection_type": "Fiber",
-    "service_no": "999992224446",
+    "service_no": 999992224446,
     "wan_address": "10.147.216.204 VLAN 3849",
     "lan_address": "10.112.222.1",
     "tunnel_ip_dr_er11": "10.220.144.100",
@@ -490,18 +458,10 @@
     "tunnel_ip_dc_er22": "10.220.156.100"
   },
   {
-    "b_id": 41,
-    "b_name": "Haranfama VSAT",
-    "connection_type": "VSAT",
-    "service_no": 9990053891,
-    "wan_address": "172.24.0.42\\10.21.95.2",
-    "default_gateway": "172.24.0.41"
-  },
-  {
-    "b_id": 42,
-    "b_name": "Haranfama Tailored",
+    "b_id": 39,
+    "b_name": "Haranfama",
     "connection_type": "Fiber",
-    "service_no": "999333888000",
+    "service_no": 999333888000,
     "wan_address": "10.147.213.236 VLAN-3818",
     "lan_address": "10.113.85.1",
     "tunnel_ip_dr_er11": "10.220.144.135",
@@ -510,7 +470,7 @@
     "tunnel_ip_dc_er22": "10.220.156.135"
   },
   {
-    "b_id": 43,
+    "b_id": 40,
     "b_name": "Hawasa",
     "connection_type": "Fiber",
     "service_no": 9999000166,
@@ -522,7 +482,7 @@
     "tunnel_ip_dc_er22": "10.220.156.22"
   },
   {
-    "b_id": 44,
+    "b_id": 41,
     "b_name": "Hawasa-district office",
     "connection_type": "Fiber",
     "service_no": 9990093039,
@@ -534,7 +494,7 @@
     "tunnel_ip_dc_er22": "10.220.156.86"
   },
   {
-    "b_id": 45,
+    "b_id": 42,
     "b_name": "Hawassa District Gaffima Office",
     "connection_type": "Fiber",
     "service_no": 93100329323,
@@ -546,7 +506,7 @@
     "tunnel_ip_dc_er22": "10.220.156.138"
   },
   {
-    "b_id": 46,
+    "b_id": 43,
     "b_name": "Hawassa District Office Southstar",
     "connection_type": "Fiber",
     "service_no": 93100264653,
@@ -558,10 +518,10 @@
     "tunnel_ip_dc_er22": "10.220.156.133"
   },
   {
-    "b_id": 47,
+    "b_id": 44,
     "b_name": "Hawassa Industrial Park",
     "connection_type": "Fiber",
-    "service_no": "25100040185",
+    "service_no": 25100040185,
     "wan_address": "10.138.204.228",
     "default_gateway": "10.138.204.226",
     "lan_address": "10.112.240.1",
@@ -571,8 +531,8 @@
     "tunnel_ip_dc_er22": "10.220.156.76"
   },
   {
-    "b_id": 48,
-    "b_name": "Hawassa Referral Branch",
+    "b_id": 45,
+    "b_name": "Hawassa Referral",
     "connection_type": "Fiber",
     "service_no": 94100227934,
     "wan_address": "10.138.213.36",
@@ -583,8 +543,8 @@
     "tunnel_ip_dc_er22": "10.220.156.129"
   },
   {
-    "b_id": 49,
-    "b_name": "Hawassa_Addisu_Meneharia",
+    "b_id": 46,
+    "b_name": "Hawassa Addisu Meneharia",
     "connection_type": "Fiber",
     "service_no": 49100161249,
     "wan_address": "10.138.211.252",
@@ -595,7 +555,7 @@
     "tunnel_ip_dc_er22": "10.220.156.123"
   },
   {
-    "b_id": 50,
+    "b_id": 47,
     "b_name": "Hayadima",
     "connection_type": "VSAT",
     "service_no": 990046813,
@@ -608,24 +568,11 @@
     "tunnel_ip_dc_er22": "10.220.156.114"
   },
   {
-    "b_id": 51,
-    "b_name": "HIP_Shade_38",
-    "connection_type": "ADSL",
-    "service_no": 61100084781,
-    "wan_address": "10.138.209.116",
-    "lan_address": "10.113.18.1",
-    "tunnel_ip_dr_er11": "10.220.144.117",
-    "tunnel_ip_dr_er12": "10.220.148.117",
-    "tunnel_ip_dc_er21": "10.220.152.117",
-    "tunnel_ip_dc_er22": "10.220.156.117"
-  },
-  {
-    "b_id": 52,
+    "b_id": 48,
     "b_name": "Hoko Girja",
-    "connection_type": "VSAT",
-    "service_no": 9990046822,
-    "wan_address": "172.24.0.58/10.21.121.2",
-    "default_gateway": "172.24.0.57",
+    "connection_type": "Fiber",
+    "service_no": 999992587896,
+    "wan_address": "10.147.216.252 VLAN 3839 ",
     "lan_address": " 10.112.249.1",
     "tunnel_ip_dr_er11": "10.220.144.107",
     "tunnel_ip_dr_er12": "10.220.148.107",
@@ -633,15 +580,7 @@
     "tunnel_ip_dc_er22": "10.220.156.107"
   },
   {
-    "b_id": 53,
-    "b_name": "Hoko Girja Tailored",
-    "connection_type": "Fiber",
-    "service_no": "999992587896",
-    "wan_address": "10.147.216.252 VLAN 3839 ",
-    "lan_address": " 10.112.249.1"
-  },
-  {
-    "b_id": 54,
+    "b_id": 49,
     "b_name": "Huladirire",
     "connection_type": "VDSL",
     "service_no": 9990021974,
@@ -653,15 +592,19 @@
     "tunnel_ip_dc_er22": "10.220.156.67"
   },
   {
-    "b_id": 55,
-    "b_name": "Kokosa ",
+    "b_id": 50,
+    "b_name": "Kokosa",
     "connection_type": "ADSL",
     "service_no": 9990033922,
     "wan_address": "10.141.215.164 ",
-    "lan_address": "10.112.89.1 "
+    "lan_address": "10.112.89.1 ",
+    "tunnel_ip_dr_er11": "",
+    "tunnel_ip_dr_er12": "",
+    "tunnel_ip_dc_er21": "",
+    "tunnel_ip_dc_er22": ""
   },
   {
-    "b_id": 56,
+    "b_id": 51,
     "b_name": "Leku",
     "connection_type": "Fiber",
     "service_no": 9990023621,
@@ -673,7 +616,7 @@
     "tunnel_ip_dc_er22": "10.220.156.21"
   },
   {
-    "b_id": 57,
+    "b_id": 52,
     "b_name": "Malawo",
     "connection_type": "Fiber",
     "service_no": 9990030674,
@@ -685,11 +628,11 @@
     "tunnel_ip_dc_er22": "10.220.156.15"
   },
   {
-    "b_id": 58,
+    "b_id": 53,
     "b_name": "Manicho",
-    "connection_type": "VSAT",
-    "service_no": 9990034669,
-    "wan_address": "172.24.0.169/10.21.1.2",
+    "connection_type": "Fiber",
+    "service_no": 999900258727,
+    "wan_address": "10.138.217.36 VLAN 2001",
     "lan_address": "10.112.230.1",
     "tunnel_ip_dr_er11": "10.220.144.95",
     "tunnel_ip_dr_er12": "10.220.148.95",
@@ -697,14 +640,7 @@
     "tunnel_ip_dc_er22": "10.220.156.95"
   },
   {
-    "b_id": 59,
-    "b_name": "Manicho Tailored",
-    "connection_type": "Fiber",
-    "service_no": "999900258727 ",
-    "wan_address": "10.138.217.36 VLAN 2001"
-  },
-  {
-    "b_id": 60,
+    "b_id": 54,
     "b_name": "Mesincho",
     "connection_type": "Fiber",
     "service_no": 9990029993,
@@ -716,8 +652,8 @@
     "tunnel_ip_dc_er22": "10.220.156.75"
   },
   {
-    "b_id": 61,
-    "b_name": "Mountain Tabour",
+    "b_id": 55,
+    "b_name": "Mountain Tabor",
     "connection_type": "Fiber",
     "service_no": 95100329325,
     "wan_address": "10.138.214.116",
@@ -728,7 +664,7 @@
     "tunnel_ip_dc_er22": "10.220.156.137"
   },
   {
-    "b_id": 62,
+    "b_id": 56,
     "b_name": "Negele Borena",
     "connection_type": "Fiber",
     "service_no": 9990000913,
@@ -740,7 +676,7 @@
     "tunnel_ip_dc_er22": "10.220.156.28"
   },
   {
-    "b_id": 63,
+    "b_id": 57,
     "b_name": "Odo Doyo",
     "connection_type": "Fiber",
     "service_no": 67100021727,
@@ -752,8 +688,8 @@
     "tunnel_ip_dc_er22": "10.220.156.94"
   },
   {
-    "b_id": 64,
-    "b_name": "Rama",
+    "b_id": 58,
+    "b_name": "Rahima CBE Noor",
     "connection_type": "Fiber",
     "service_no": 44100097644,
     "wan_address": "10.138.210.68",
@@ -764,7 +700,7 @@
     "tunnel_ip_dc_er22": "10.220.156.119"
   },
   {
-    "b_id": 65,
+    "b_id": 59,
     "b_name": "Shafeta",
     "connection_type": "Fiber",
     "service_no": 98100643458,
@@ -776,10 +712,10 @@
     "tunnel_ip_dc_er22": "10.220.156.141"
   },
   {
-    "b_id": 66,
+    "b_id": 60,
     "b_name": "Shakisso",
     "connection_type": "Fiber",
-    "service_no": "9990000921",
+    "service_no": 9990000921,
     "wan_address": "10.147.192.228 VLAN-3883",
     "lan_address": "10.112.13.1",
     "tunnel_ip_dr_er11": "10.220.144.43",
@@ -788,7 +724,7 @@
     "tunnel_ip_dc_er22": "10.220.156.43"
   },
   {
-    "b_id": 67,
+    "b_id": 61,
     "b_name": "Sidama Buna",
     "connection_type": "Fiber",
     "service_no": 9310090723,
@@ -800,7 +736,7 @@
     "tunnel_ip_dc_er22": "10.220.156.126"
   },
   {
-    "b_id": 68,
+    "b_id": 62,
     "b_name": "Sumuda",
     "connection_type": "Fiber",
     "service_no": 48100142738,
@@ -812,8 +748,8 @@
     "tunnel_ip_dc_er22": "10.220.156.121"
   },
   {
-    "b_id": 69,
-    "b_name": "Tabour",
+    "b_id": 63,
+    "b_name": "Tabor",
     "connection_type": "Fiber",
     "service_no": 9999000178,
     "wan_address": "10.138.194.84",
@@ -824,7 +760,7 @@
     "tunnel_ip_dc_er22": "10.220.156.52"
   },
   {
-    "b_id": 70,
+    "b_id": 64,
     "b_name": "Tesso",
     "connection_type": "Fiber",
     "service_no": 9990050168,
@@ -836,10 +772,10 @@
     "tunnel_ip_dc_er22": "10.220.156.54"
   },
   {
-    "b_id": 71,
+    "b_id": 65,
     "b_name": "Teticha",
     "connection_type": "Fiber",
-    "service_no": "999944443333",
+    "service_no": 999944443333,
     "wan_address": "10.147.216.220 VLAN 3871",
     "lan_address": "10.113.100.1",
     "tunnel_ip_dr_er11": "10.220.144.142",
@@ -848,15 +784,7 @@
     "tunnel_ip_dc_er22": "10.220.156.142"
   },
   {
-    "b_id": 72,
-    "b_name": "Teticha VSAT",
-    "connection_type": "VSAT",
-    "service_no": 9990029745,
-    "wan_address": "172.24.0.76/10.21.106.2",
-    "default_gateway": "172.24.0.73"
-  },
-  {
-    "b_id": 73,
+    "b_id": 66,
     "b_name": "Tulla",
     "connection_type": "Fiber",
     "service_no": 41100049021,
@@ -868,8 +796,8 @@
     "tunnel_ip_dc_er22": "10.220.156.79"
   },
   {
-    "b_id": 74,
-    "b_name": "W/Amanuel Adebabay",
+    "b_id": 67,
+    "b_name": "Wolde Amanuel Adebabay",
     "connection_type": "Fiber",
     "service_no": 64100021724,
     "wan_address": "10.138.204.212",
@@ -880,10 +808,10 @@
     "tunnel_ip_dc_er22": "10.220.156.80"
   },
   {
-    "b_id": 75,
+    "b_id": 68,
     "b_name": "Wadera",
     "connection_type": "Fiber",
-    "service_no": "9990019461",
+    "service_no": 9990019461,
     "wan_address": "10.147.194.156 VLAN-3892",
     "lan_address": "10.112.94.1",
     "tunnel_ip_dr_er11": "10.220.144.56",
@@ -892,10 +820,10 @@
     "tunnel_ip_dc_er22": "10.220.156.56"
   },
   {
-    "b_id": 76,
-    "b_name": "Wensho Tailored",
+    "b_id": 69,
+    "b_name": "Wensho",
     "connection_type": "Fiber",
-    "service_no": "999900888245",
+    "service_no": 999900888245,
     "wan_address": "10.138.214.196 VLAN 3824",
     "lan_address": "10.112.219.1",
     "tunnel_ip_dr_er11": "10.220.144.88",
@@ -904,8 +832,8 @@
     "tunnel_ip_dc_er22": "10.220.156.88"
   },
   {
-    "b_id": 77,
-    "b_name": "Wondogenet /Basha",
+    "b_id": 70,
+    "b_name": "Wondogenet Chuko",
     "connection_type": "Fiber",
     "service_no": 9990078521,
     "wan_address": "10.137.199.164 VLAN 3880",
@@ -916,7 +844,7 @@
     "tunnel_ip_dc_er22": "10.220.156.59"
   },
   {
-    "b_id": 78,
+    "b_id": 71,
     "b_name": "Yirgalem ",
     "connection_type": "Fiber",
     "service_no": 9990000166,
@@ -928,7 +856,7 @@
     "tunnel_ip_dc_er22": "10.220.156.64"
   },
   {
-    "b_id": 79,
+    "b_id": 72,
     "b_name": "Yirgalem Industry Park",
     "connection_type": "Fiber",
     "service_no": 92100435422,
@@ -940,10 +868,10 @@
     "tunnel_ip_dc_er22": "10.220.156.140"
   },
   {
-    "b_id": 80,
+    "b_id": 73,
     "b_name": "Derara",
     "connection_type": "Fiber",
-    "service_no": "999900088453",
+    "service_no": 999900088453,
     "wan_address": "10.147.219.140 VLAN 3903",
     "lan_address": "10.113.114.1",
     "tunnel_ip_dr_er11": "10.220.144.145",
@@ -952,7 +880,7 @@
     "tunnel_ip_dc_er22": "10.220.156.140"
   },
   {
-    "b_id": 81,
+    "b_id": 74,
     "b_name": "Luwa",
     "connection_type": "Fiber",
     "service_no": 93100979874,
@@ -964,7 +892,7 @@
     "tunnel_ip_dc_er22": "10.220.156.147"
   },
   {
-    "b_id": 82,
+    "b_id": 75,
     "b_name": "Ardaliben",
     "connection_type": "Fiber",
     "service_no": 94101076105,
@@ -976,24 +904,16 @@
     "tunnel_ip_dc_er22": "10.220.156.149"
   },
   {
-    "wan_address": "10.147.226.180       deka"
-  },
-  {
-    "wan_address": "10.113.156.1           deka LAN"
-  },
-  {
-    "service_no": "Summary"
-  },
-  {
-    "service_no": "Total ADSL"
-  },
-  {
-    "service_no": "Total Fiber"
-  },
-  {
-    "service_no": "Total VDSL"
-  },
-  {
-    "service_no": "Total VSAT"
+    "b_id": 76,
+    "b_name": "Deka Softu",
+    "connection_type": "Fiber",
+    "service_no": null,
+    "wan_address": "10.147.226.180",
+    "lan_address": "10.113.156.1 ",
+    "tunnel_ip_dr_er11": "",
+    "tunnel_ip_dr_er12": "",
+    "tunnel_ip_dc_er21": "",
+    "tunnel_ip_dc_er22": ""
   }
 ]
+module.exports = branch_info;
