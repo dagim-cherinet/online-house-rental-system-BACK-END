@@ -18,14 +18,15 @@ const {
 } = require("../controllers/register");
 const { login } = require("../controllers/login");
 const {
-  allHouses,
+  allBranches,
+  populateDB,
   ownersHouse,
   rentersHouse,
   oneHouse,
   checkHouse,
   changeHouseStatus,
   deleteHouse,
-} = require("../controllers/houses");
+} = require("../controllers/branches");
 const { search } = require("../controllers/search");
 const { changePassword } = require("../controllers/change_password");
 const {
@@ -51,7 +52,11 @@ router.route("/registerRenter").post(registerRenter);
 router.route("/registerOwner").post(registerOwner);
 router.route("/registerAdmin").post(registerAdmin);
 router.route("/login").post(login);
-router.route("/allHouses").get(allHouses);
+
+
+
+router.route("/allBranches").get(allBranches);
+router.route("/populateDB").get(populateDB);
 //
 router.route("/ownersHouse/:token").get(ownersHouse);
 router.route("/rentersHouse/:token").get(rentersHouse);

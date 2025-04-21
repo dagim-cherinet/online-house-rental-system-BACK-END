@@ -2,16 +2,30 @@ const jwt = require("jsonwebtoken");
 const JWT_STRING = "kfkjfkjfdkjakdjferuej#$#$#2u3@#@$@kfj";
 const dbServices = require("../db/dbServices");
 
-const allHouses = async (req, res) => {
+const allBranches = async (req, res) => {
   const db = dbServices.getDbServiceInstance();
-  const response = db.getAllHouses();
+  const response = db.getAllBranches();
   response
     .then((data) => {
       console.log(data);
-      res.json({ status: "request successful", data: data });
+      res.json({ status: "request successful", data: data[0].result });
     })
     .catch((err) => console.log(err));
 };
+
+const populateDB = async (req, res) => {
+  const db = dbServices.getDbServiceInstance();
+  const response = db.populateDB({});
+  response
+    .then((data) => {
+      console.log(data);
+      res.json({ status: "request successful" });
+    })
+    .catch((err) => console.log(err));
+};
+
+
+
 const ownersHouse = async (req, res) => {
   const { token } = req.params;
   console.log(token);
@@ -82,7 +96,8 @@ const deleteHouse = async (req, res) => {
   });
 };
 module.exports = {
-  allHouses,
+  allBranches,
+  populateDB,
   ownersHouse,
   oneHouse,
   checkHouse,

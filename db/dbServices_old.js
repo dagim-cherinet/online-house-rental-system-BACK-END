@@ -34,8 +34,8 @@ connectToDatabase()
       INSERT INTO branches (
         b_id, b_name, connection_type, service_no, wan_address, 
         lan_address, tunnel_ip_dr_er11, tunnel_ip_dr_er12, 
-        tunnel_ip_dc_er21, tunnel_ip_dc_er22
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        tunnel_ip_dc_er21, tunnel_ip_dc_er22, account_no
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
     for (const branch of branchesData) {
@@ -49,7 +49,8 @@ connectToDatabase()
         branch.tunnel_ip_dr_er11,
         branch.tunnel_ip_dr_er12,
         branch.tunnel_ip_dc_er21,
-        branch.tunnel_ip_dc_er22
+        branch.tunnel_ip_dc_er22,
+        "no data"
       ]);
       console.log(`Inserted branch: ${branch.b_name}`);
     }
