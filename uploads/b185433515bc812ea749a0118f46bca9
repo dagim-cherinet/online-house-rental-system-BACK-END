@@ -1,0 +1,503 @@
+hostname CBE6084_00_ER1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 4 0U6AqPCQhHFHBiQOszWj3d7g8/UvbxF9UHWgUtg0Byg
+!
+aaa new-model
+!
+!
+aaa group server tacacs+ DCAdmin
+ server 10.1.10.11
+ server 10.1.10.12
+!
+aaa authentication login default group DCAdmin local
+aaa authentication enable default group DCAdmin enable
+aaa authorization console
+aaa authorization config-commands
+aaa authorization exec default group DCAdmin local
+aaa authorization commands 15 CBEAdmin group DCAdmin local
+aaa authorization network default group DCAdmin
+aaa authorization configuration default group DCAdmin
+aaa accounting exec default start-stop group DCAdmin
+aaa accounting commands 15 CDEAdmin start-stop group DCAdmin
+aaa accounting network default start-stop group DCAdmin
+aaa accounting connection default start-stop group DCAdmin
+aaa accounting system default start-stop group DCAdmin
+!
+!
+!
+!
+!
+!
+aaa session-id common
+memory-size iomem 10
+clock timezone EAT 3 0
+clock calendar-valid
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name cbe.com.et
+ip host CBE-CA 10.1.0.17
+ip host CBE-CA2 10.3.0.17
+ip name-server 10.1.11.13
+ip name-server 10.1.11.16
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+cts logging verbose
+!
+crypto pki trustpoint RTR-CA
+ enrollment url http://CBE-CA:80
+ revocation-check none
+ auto-enroll 70 regenerate
+!
+crypto pki trustpoint RTR-CA2
+ enrollment url http://CBE-CA2:80
+ revocation-check none
+ auto-enroll 70 regenerate
+!
+!
+license udi pid CISCO1941/K9 sn FCZ172091HV
+!
+!
+object-group service BGP-SERVICE
+ tcp eq bgp
+ tcp source eq bgp
+!
+object-group network CBE-MGMT-IP
+ 10.1.2.0 255.255.255.0
+ 10.3.2.0 255.255.255.0
+ 10.8.50.0 255.255.254.0
+ 10.8.54.0 255.255.254.0
+ 10.131.196.168 255.255.255.248
+ 10.221.0.0 255.255.0.0
+ 10.131.198.40 255.255.255.248
+ 10.153.192.40 255.255.255.248
+!
+object-group service CBE-MGMT-SERVICE
+ tcp eq 22
+ icmp echo
+ icmp echo-reply
+ udp eq snmp
+ udp source eq snmp
+ udp eq ntp
+ udp source eq ntp
+!
+object-group service DMVPN-SERVICE
+ udp eq isakmp
+ udp eq non500-isakmp
+ esp
+ gre
+ ahp
+!
+object-group network ETC-MGMT-IP
+ 172.16.8.0 255.255.255.0
+ 10.128.0.0 255.255.0.0
+ 10.153.0.0 255.255.0.0
+!
+object-group service ETC-MGMT-SERVICE
+ icmp echo
+ icmp echo-reply
+!
+object-group network IPSEC-ENDPOINT
+ 10.221.0.0 255.255.192.0
+!
+object-group network LOCAL-WANIP
+ host 10.147.196.20
+!
+object-group network REMOTE-WANIP
+ 10.7.0.0 255.255.0.0
+ 10.19.0.0 255.255.0.0
+ 10.21.0.0 255.255.0.0
+ 10.128.0.0 255.224.0.0
+ 172.28.0.0 255.254.0.0
+ 192.168.0.0 255.255.0.0
+!
+object-group network ROOT-CA
+ host 10.1.0.17
+ host 10.3.0.17
+!
+object-group service ROOT-CA-SERVICE
+ tcp eq www
+!
+username bekele5076 privilege 15 secret 4 hZKwJUCB4LZeBFC0I1rl97SlHY8O559F2L2vepGg/lQ
+username asnake19472 privilege 15 secret 4 hZKwJUCB4LZeBFC0I1rl97SlHY8O559F2L2vepGg/lQ
+username anteneh15976 privilege 15 secret 4 hZKwJUCB4LZeBFC0I1rl97SlHY8O559F2L2vepGg/lQ
+username aychilum11325 privilege 15 secret 4 hZKwJUCB4LZeBFC0I1rl97SlHY8O559F2L2vepGg/lQ
+username fasil27965 privilege 15 secret 4 hZKwJUCB4LZeBFC0I1rl97SlHY8O559F2L2vepGg/lQ
+username fitsum25836 privilege 15 secret 4 hZKwJUCB4LZeBFC0I1rl97SlHY8O559F2L2vepGg/lQ
+username solomon28033 privilege 15 secret 4 hZKwJUCB4LZeBFC0I1rl97SlHY8O559F2L2vepGg/lQ
+username tariku17599 privilege 15 secret 4 hZKwJUCB4LZeBFC0I1rl97SlHY8O559F2L2vepGg/lQ
+username issayas49194 privilege 15 secret 4 hZKwJUCB4LZeBFC0I1rl97SlHY8O559F2L2vepGg/lQ
+username mehadin19536 privilege 15 secret 4 hZKwJUCB4LZeBFC0I1rl97SlHY8O559F2L2vepGg/lQ
+username bizayehu49799 privilege 15 secret 4 hZKwJUCB4LZeBFC0I1rl97SlHY8O559F2L2vepGg/lQ
+username duressa49803 privilege 15 secret 4 hZKwJUCB4LZeBFC0I1rl97SlHY8O559F2L2vepGg/lQ
+username wondifraw16181 privilege 15 secret 4 hZKwJUCB4LZeBFC0I1rl97SlHY8O559F2L2vepGg/lQ
+username mulugeta49800 privilege 15 secret 4 hZKwJUCB4LZeBFC0I1rl97SlHY8O559F2L2vepGg/lQ
+username Addisu49643 privilege 15 secret 5 $1$OyR5$.RkTWiQZwAigY/JW81qZZ0
+username Admasu12795 privilege 15 secret 5 $1$R23K$Pa9fvrly7HT3Xyh0x9cTl.
+username Asires35510 privilege 15 secret 5 $1$j1SS$kGvAufHydI8LqVkWhDxTa1
+username Aynalem16679 privilege 15 secret 5 $1$ph1k$9tidM4qm1L.Gwd7ffEufo0
+username Esrael35476 privilege 15 secret 5 $1$wwU7$Atlkp9ERnTzyAvAUTY7rI0
+username Fekadu35489 privilege 15 secret 5 $1$Faaw$iGxwpqyPP8fNHr2fcUdr3.
+username Frezer27838 privilege 15 secret 5 $1$Ur0N$8z9Btc45uwUT0.56fxaK11
+username Getaw29906 privilege 15 secret 5 $1$eGp3$zj2NMWD6B5jZ0z2Dv9QQw1
+username Girmaw7706 privilege 15 secret 5 $1$sHB8$5BhuybTTBuQbrcXQF4evo.
+username Habtamu48519 privilege 15 secret 5 $1$38cR$4JJEZlL3Vgw.xjFpJ.tH11
+username Habtish12812 privilege 15 secret 5 $1$KIV7$AHz4KquYJ6JY9cMHCmQUV.
+username Hailemichael15781 privilege 15 secret 5 $1$xDBG$E0snkdIYr/e5.ewHdCc5s/
+username Hayilemariam35488 privilege 15 secret 5 $1$c6kh$/jI/T/3wGekI/Va85j9r0.
+username Meseret35503 privilege 15 secret 5 $1$EC6F$hZqiPXQtvbcPRJ2nfxOAu.
+username Mintesnot49617 privilege 15 secret 5 $1$JgnS$0RyPt8DEFXhFRBU3MTeVQ.
+username Musa16171 privilege 15 secret 5 $1$NS.p$NIpzxPPLK1CSOJHr/21GW/
+username Nardos48532 privilege 15 secret 5 $1$jiPf$i/Qzhs5RXy292zDJxtyAN1
+username Natnael28765 privilege 15 secret 5 $1$cFAq$adYOUT0stEz51f7kVepmq1
+username Selamawit48662 privilege 15 secret 5 $1$lyhS$wpw/f/y3VWJnpkTLXl8fZ.
+username Sertsedengle48540 privilege 15 secret 5 $1$xXAz$ENvgz0TC6Q0W4fpUUQKBU.
+username Tamirat48548 privilege 15 secret 5 $1$y3Tf$fO8ehIUiv13Y/UFW0TIhP.
+username Tesfahun48900 privilege 15 secret 5 $1$HWDD$toWabLbb2prsfVKZfDTVB.
+username Teshome48553 privilege 15 secret 5 $1$6omW$zXRey8OWRa3kfTsyj.Hgq1
+username Tseadaamariyam15843 privilege 15 secret 5 $1$Uu73$/eePiZqE2ATMP62PuAm9.1
+username Walelign10226 privilege 15 secret 5 $1$ZtKb$VukYboc/.68xLnLJE4WJp/
+username Yahya16175 privilege 15 secret 5 $1$Bi.u$pE9XfzCWbFECzESzBluZE.
+username Yohannes48559 privilege 15 secret 5 $1$BuDf$/I2S02cm.SGDqmUnC4VVu.
+username Yomiyu49163 privilege 15 secret 5 $1$Bq/z$hVwrS1yWsx05eR1y52DoM0
+username Yonas16352 privilege 15 secret 5 $1$wzOz$caySOYTUlJBG9n1a9CFcp1
+username Yonas35491 privilege 15 secret 5 $1$gda1$BOTt1Ntu3uo/kwQHTPSiY0
+username Yonas35492 privilege 15 secret 5 $1$tIYA$Unqt5EYirL38lH/7khoLF/
+username Yonatan49187 privilege 15 secret 5 $1$PPRL$1ccIRJ2w93Bu4j2ps6eBE1
+username Yonatan49192 privilege 15 secret 5 $1$/IdH$5C.P2cgaiAYidJCi/X7fc.
+username Yordanos49193 privilege 15 secret 5 $1$oR2r$3nCoHrGwlTG1QpegPNy1R/
+username habtamu41724 privilege 15 secret 5 $1$f1Mf$ZxH.n2WZsmt8z0Y2S3Em41
+username biniyam48889 privilege 15 secret 5 $1$RyLc$fIPYDeUkiMnyXUB6LcGOF0
+username girma48788 privilege 15 secret 5 $1$0zQQ$Sqfpg0mFLPX9Zev.64K6b.
+username jovani48695 privilege 15 secret 5 $1$yH5i$pajz68Y9o26yr7gxbBUEf0
+username samson27891 privilege 15 secret 5 $1$QTB4$LsLQontP81e1EDAr5mqSH1
+username tsegaw15789 privilege 15 secret 5 $1$SmGi$VvT3ynPRpiQhO6wGYZ9ui.
+username mesfin48860 privilege 15 secret 5 $1$ffRE$UaACxebEiz/gEPKPy6nEz1
+username alemneh48787 privilege 15 secret 5 $1$85Uy$L6KHP3MlElRCpvO0wF5sR/
+username endale48691 privilege 15 secret 5 $1$Fp4K$WQgjpg5zfOFMMQ51hbtdt0
+username yihenew27863 privilege 15 secret 5 $1$yIlE$UBDxOqW5weOuZR2kUIlD61
+username abdurahim29749 privilege 15 secret 5 $1$Japh$LOuPBGmqF4MWNcXx2PXvO.
+username kenno19119 privilege 15 secret 5 $1$uyEP$6GdzSobvKnosXgR4cGoq50
+username abdi41714 privilege 15 secret 5 $1$UBnx$lNPcEy6BTwjr6WlsVIXBq1
+username cyblogn secret 5 $1$raxf$AN.3.onxQU4R0cmqPLEsA1
+username cybrrecon privilege 15 secret 5 $1$B2ea$irMMQ6HDVosewl/SoY8kZ/
+username Emebet49652 privilege 15 secret 5 $1$GuGG$zYvafFEaYYLgdidRnsU2m1
+secure boot-image
+secure boot-config
+!
+redundancy
+!
+!
+!
+!
+no cdp run
+!
+ip ssh time-out 60
+ip ssh authentication-retries 2
+ip ssh version 2
+!
+!
+crypto isakmp policy 2
+ encr aes 256
+ group 2
+crypto isakmp identity hostname
+!
+!
+crypto ipsec transform-set CBE-trans esp-aes 256 esp-sha-hmac
+ mode transport
+crypto ipsec fragmentation after-encryption
+!
+crypto ipsec profile CBE-IPSec-CA-Profile
+ set transform-set CBE-trans
+!
+crypto ipsec profile CBE-IPSec-CA-Profile1
+ set transform-set CBE-trans
+!
+!
+!
+bridge irb
+!
+!
+!
+!
+interface Loopback0
+ ip address 10.112.83.225 255.255.255.255
+!
+interface Tunnel110
+ description DMVPN to DR-ER11, Hawassa District(10)
+ ip address 10.220.144.13 255.255.252.0
+ no ip redirects
+ ip mtu 1400
+ ip nhrp authentication CBE
+ ip nhrp map 10.220.144.1 10.221.0.37
+ ip nhrp map multicast 10.221.0.37
+ ip nhrp network-id 110
+ ip nhrp holdtime 600
+ ip nhrp nhs 10.220.144.1
+ ip tcp adjust-mss 1360
+ tunnel source GigabitEthernet0/0.3878
+ tunnel destination 10.221.0.37
+ tunnel key 110
+ tunnel path-mtu-discovery
+ tunnel protection ipsec profile CBE-IPSec-CA-Profile shared
+!
+interface Tunnel210
+ description DMVPN to DR-ER12, Hawassa District(10)
+ ip address 10.220.148.13 255.255.252.0
+ no ip redirects
+ ip mtu 1400
+ ip nhrp authentication CBE
+ ip nhrp map 10.220.148.1 10.221.1.37
+ ip nhrp map multicast 10.221.1.37
+ ip nhrp network-id 210
+ ip nhrp holdtime 600
+ ip nhrp nhs 10.220.148.1
+ ip tcp adjust-mss 1360
+ tunnel source GigabitEthernet0/0.3878
+ tunnel destination 10.221.1.37
+ tunnel key 210
+ tunnel path-mtu-discovery
+ tunnel protection ipsec profile CBE-IPSec-CA-Profile shared
+!
+interface Tunnel310
+ description DMVPN to DC-ER21, Hawassa District(10)
+ ip address 10.220.152.13 255.255.252.0
+ no ip redirects
+ ip mtu 1400
+ ip nhrp authentication CBE
+ ip nhrp map 10.220.152.1 10.221.2.37
+ ip nhrp map multicast 10.221.2.37
+ ip nhrp network-id 310
+ ip nhrp holdtime 600
+ ip nhrp nhs 10.220.152.1
+ ip tcp adjust-mss 1360
+ tunnel source GigabitEthernet0/0.3878
+ tunnel destination 10.221.2.37
+ tunnel key 310
+ tunnel path-mtu-discovery
+ tunnel protection ipsec profile CBE-IPSec-CA-Profile shared
+!
+interface Tunnel410
+ description DMVPN to DC-ER22, Hawassa District(10)
+ ip address 10.220.156.13 255.255.252.0
+ no ip redirects
+ ip mtu 1400
+ ip nhrp authentication CBE
+ ip nhrp map 10.220.156.1 10.221.3.37
+ ip nhrp map multicast 10.221.3.37
+ ip nhrp network-id 410
+ ip nhrp holdtime 600
+ ip nhrp nhs 10.220.156.1
+ ip tcp adjust-mss 1360
+ tunnel source GigabitEthernet0/0.3878
+ tunnel destination 10.221.3.37
+ tunnel key 410
+ tunnel path-mtu-discovery
+ tunnel protection ipsec profile CBE-IPSec-CA-Profile shared
+!
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0.3878
+ encapsulation dot1Q 3878
+ ip address 10.147.196.20 255.255.255.248
+ ip nat outside
+ ip virtual-reassembly in
+ no cdp enable
+!
+interface GigabitEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1.20
+ description DATA INTERFACE
+ encapsulation dot1Q 20
+ ip address 10.112.83.1 255.255.255.128
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1.61
+ description MGMT INTERFACE
+ encapsulation dot1Q 61
+ ip address 10.112.83.161 255.255.255.224
+ duplex auto
+ speed auto
+!
+router bgp 64520
+ bgp router-id 10.112.83.225
+ bgp log-neighbor-changes
+ neighbor EDGE-ROUTERS peer-group
+ neighbor EDGE-ROUTERS remote-as 64520
+ neighbor EDGE-ROUTERS password 7 0508040A32494D1B1C11
+ neighbor 10.220.144.1 peer-group EDGE-ROUTERS
+ neighbor 10.220.148.1 peer-group EDGE-ROUTERS
+ neighbor 10.220.152.1 peer-group EDGE-ROUTERS
+ neighbor 10.220.156.1 peer-group EDGE-ROUTERS
+ !
+ address-family ipv4
+  network 10.112.83.0 mask 255.255.255.0
+  neighbor 10.220.144.1 activate
+  neighbor 10.220.148.1 activate
+  neighbor 10.220.152.1 activate
+  neighbor 10.220.156.1 activate
+ exit-address-family
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+ip route 0.0.0.0 0.0.0.0 10.147.196.17 250
+ip route 10.112.83.0 255.255.255.0 Null0
+ip route 10.131.196.168 255.255.255.248 10.147.196.17
+ip route 10.131.198.40 255.255.255.248 10.147.196.17
+ip route 10.153.192.40 255.255.255.248 10.147.196.17
+ip route 10.221.0.0 255.255.255.0 10.147.196.17
+ip route 10.221.1.0 255.255.255.0 10.147.196.17
+ip route 10.221.2.0 255.255.255.0 10.147.196.17
+ip route 10.221.3.0 255.255.255.0 10.147.196.17
+ip tacacs source-interface Loopback0
+!
+logging source-interface Loopback0
+logging host 10.1.2.5
+logging host 10.1.2.2
+!
+!
+snmp-server engineID local 1234567890
+snmp-server user CBESNMPCBE CBESNMPGR v2c
+snmp-server group CBEAdmin v3 priv
+snmp-server group CBENSMPV3 v3 auth
+snmp-server group CBENSMPV3 v3 priv
+snmp-server group CBESNMPGR v2c read CBERD access 20
+snmp-server group CBE_ADMINS_PRIV v3 priv
+snmp-server view CBERD mib-2 included
+snmp-server view CBERD cisco included
+snmp-server trap-source Loopback0
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps vrrp
+snmp-server enable traps tty
+snmp-server enable traps eigrp
+snmp-server enable traps ospf state-change
+snmp-server enable traps ospf errors
+snmp-server enable traps ospf retransmit
+snmp-server enable traps ospf lsa
+snmp-server enable traps ospf cisco-specific state-change nssa-trans-change
+snmp-server enable traps ospf cisco-specific state-change shamlink interface-old
+snmp-server enable traps ospf cisco-specific state-change shamlink neighbor
+snmp-server enable traps ospf cisco-specific errors
+snmp-server enable traps ospf cisco-specific retransmit
+snmp-server enable traps ospf cisco-specific lsa
+snmp-server enable traps license
+snmp-server enable traps ethernet cfm cc mep-up mep-down cross-connect loop config
+snmp-server enable traps ethernet cfm crosscheck mep-missing mep-unknown service-up
+snmp-server enable traps flash insertion removal
+snmp-server enable traps adslline
+snmp-server enable traps vdsl2line
+snmp-server enable traps envmon
+snmp-server enable traps c3g
+snmp-server enable traps isdn call-information
+snmp-server enable traps isdn layer2
+snmp-server enable traps isdn chan-not-avail
+snmp-server enable traps isdn ietf
+snmp-server enable traps energywise
+snmp-server enable traps cef resource-failure peer-state-change peer-fib-state-change inconsistency
+snmp-server enable traps aaa_server
+snmp-server enable traps atm subif
+snmp-server enable traps bgp
+snmp-server enable traps memory bufferpeak
+snmp-server enable traps cnpd
+snmp-server enable traps config-copy
+snmp-server enable traps config
+snmp-server enable traps config-ctid
+snmp-server enable traps entity
+snmp-server enable traps fru-ctrl
+snmp-server enable traps resource-policy
+snmp-server enable traps event-manager
+snmp-server enable traps hsrp
+snmp-server enable traps ipmulticast
+snmp-server enable traps msdp
+snmp-server enable traps mvpn
+snmp-server enable traps pim neighbor-change rp-mapping-change invalid-pim-message
+snmp-server enable traps cpu threshold
+snmp-server enable traps rsvp
+snmp-server enable traps ipsla
+snmp-server enable traps syslog
+snmp-server enable traps l2tun session
+snmp-server enable traps l2tun pseudowire status
+snmp-server enable traps vtp
+snmp-server enable traps nhrp nhs
+snmp-server enable traps nhrp nhc
+snmp-server enable traps nhrp nhp
+snmp-server enable traps nhrp quota-exceeded
+snmp-server host 10.1.10.100 informs version 3 auth CBEAdmin
+snmp-server host 10.1.10.100 version 3 priv CBEAdmin udp-port 161
+snmp-server host 10.1.10.100 version 3 auth CBEAdmin
+snmp-server host 10.1.2.2 version 3 priv CBEAdmin udp-port 161  snmp
+snmp-server host 10.1.2.5 version 3 priv CBEAdmin udp-port 161  snmp
+tacacs-server host 10.1.10.11 single-connection
+tacacs-server host 10.1.10.12 single-connection
+tacacs-server directed-request
+tacacs-server key 7 08224E4B2A1016141D221F01
+!
+!
+!
+control-plane
+!
+bridge 1 protocol ieee
+bridge 1 route ip
+!
+banner exec ^C
+If you are not an authorized user, disconnect now!
+^C
+banner login ^C
+stem with login   restricted to authorized personnel.
+ Any unauthorized access attempt will be investigated and prosecuted to the full extent of the law!
+^C
+banner motd ^C
+YOUR LOGIN DETAILS HAVE BEEN CAPTURED AND LOGGED!^C
+!
+line con 0
+ exec-timeout 5 0
+ authorization commands 15 CBEAdmin
+ accounting commands 15 CBEAdmin
+ logging synchronous
+ no modem enable
+line aux 0
+line vty 0 4
+ exec-timeout 5 0
+ authorization commands 15 CBEAdmin
+ accounting commands 15 CBEAdmin
+ transport input ssh
+line vty 5 15
+ exec-timeout 5 0
+ password 7 013024217B22283C00
+ transport input none
+!
+scheduler allocate 20000 1000
+ntp authentication-key 10 md5 0478292321157C 7
+ntp authenticate
+ntp trusted-key 10
+ntp server 10.221.0.1 prefer
+ntp server 10.221.3.1 key 10
+!
+end

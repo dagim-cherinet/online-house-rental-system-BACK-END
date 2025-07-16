@@ -243,7 +243,26 @@ FROM branches b;`          // Use the promise-based API with await
             console.log(err);
         }
     }
+    async uploadConfigurationToDB({ label, configuration, branch_id }) {
+        // const { branch_id, label, configuration } = configurationDetail;
+        console.log("uploading configuration to DB");
+        try {
+            // Ensure connection exists
+            if (!connection) {
+                throw new Error("Database connection not established");
+            }
+            //I can say response but i am expecting insert ID
+            //  console.log({ label, configuration, branch_id });
 
+            const query = ` INSERT INTO router_configurations (label, configuration, branch_id )
+                VALUES(?, ?, ?)`;
+
+            await connection.execute(query, [label || 'Unnamed Config', configuration, branch_id]);
+            return { status: "success", message: "Configuration uploaded successfully" };
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
 }
 

@@ -17,6 +17,11 @@ const {
   registerAdmin,
 } = require("../controllers/register");
 const { login } = require("../controllers/login");
+//upload configuration
+
+const { uploadMiddleware, uploadConfiguration } = require("../controllers/upload_configuration");
+
+
 const {
   allBranches,
   populateDB,
@@ -53,11 +58,17 @@ router.route("/registerOwner").post(registerOwner);
 router.route("/registerAdmin").post(registerAdmin);
 router.route("/login").post(login);
 
-
+// branches
 
 router.route("/allBranches").get(allBranches);
 router.route("/populateDB").get(populateDB);
-//
+
+// upload configuration
+
+router.route("/uploadConfig").post(uploadMiddleware.single("configurationFile"), uploadConfiguration);
+
+
+
 router.route("/ownersHouse/:token").get(ownersHouse);
 router.route("/rentersHouse/:token").get(rentersHouse);
 //
