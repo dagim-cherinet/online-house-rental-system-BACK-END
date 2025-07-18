@@ -24,7 +24,7 @@ const uploadConfiguration = async (req, res) => {
     console.log(req.body)
     console.log(req.file)
 
-    const { branch_id } = req.body;
+    const { branch_id, model } = req.body;
     const label = req.file.originalname;
     if (!req.file) {
         return res.status(400).json({ error: 'No file uploaded' });
@@ -33,7 +33,7 @@ const uploadConfiguration = async (req, res) => {
     await fs.unlink(req.file.path); // Delete temp file
 
     const db = dbServices.getDbServiceInstance();
-    const response = db.uploadConfigurationToDB({ label, configuration, branch_id });
+    const response = db.uploadConfigurationToDB({ label, configuration, branch_id, model });
     response
         .then((data) => res.json({ status: "upload is successful" }))
         .catch((err) => console.log(err));
