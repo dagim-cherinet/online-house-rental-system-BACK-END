@@ -12,7 +12,18 @@ const allBranches = async (req, res) => {
     })
     .catch((err) => console.log(err));
 };
+const branchConfig = async (req, res) => {
+  const { branchId, configType } = req.query;
 
+  const db = dbServices.getDbServiceInstance();
+  const response = db.getConfiguration({ branchId, configType });
+  response
+    .then((data) => {
+      console.log(data);
+      res.json({ status: "request successful", data: data });
+    })
+    .catch((err) => console.log(err));
+};
 const populateDB = async (req, res) => {
   const db = dbServices.getDbServiceInstance();
   const response = db.populateDB({});
@@ -98,6 +109,7 @@ const deleteHouse = async (req, res) => {
 module.exports = {
   allBranches,
   populateDB,
+  branchConfig,
   ownersHouse,
   oneHouse,
   checkHouse,

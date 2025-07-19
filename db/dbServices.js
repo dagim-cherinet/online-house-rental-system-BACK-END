@@ -264,6 +264,35 @@ FROM branches b;`          // Use the promise-based API with await
             console.log(err);
         }
     }
+    async getConfiguration({ branchId, configType }) {
+        try {
+            // Ensure connection exists
+            if (!connection) {
+                throw new Error("Database connection not established");
+            }
+            // Use the promise-based API with await
+            let query;
+            if (!configType || !branchId) {
+                throw new Error("Missing required parameters");
+            }
+            if (configType === 'routerConfig') {
+                query = `SELECT * FROM router_configurations WHERE branch_id = ?`;
+            } else if (configType === 'switchConfig') {
+                query = `SELECT * FROM switch_configurations WHERE branch_id = ?`;
+            } else {
+                // throw new Error("Invalid configuration type");
+                // Default to routerConfig if type is not recognized Like LAN OR WAN type
+                // This can be adjusted in the future if needed
+                query = `SELECT * FROM router_configurations WHERE branch_id = ?`;
+            }
+            const [rows] = await connection.execute(query, [branchId]);
+            // console.log(rows);
+            return rows;
+        } catch (error) {
+            console.log(error);
+            throw error; // Re-throw for proper handling upstream
+        }
+    }
 
 }
 

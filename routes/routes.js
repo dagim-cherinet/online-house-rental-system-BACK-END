@@ -25,6 +25,7 @@ const { uploadMiddleware, uploadConfiguration } = require("../controllers/upload
 const {
   allBranches,
   populateDB,
+  branchConfig,
   ownersHouse,
   rentersHouse,
   oneHouse,
@@ -63,12 +64,13 @@ router.route("/login").post(login);
 router.route("/allBranches").get(allBranches);
 router.route("/populateDB").get(populateDB);
 
-// upload configuration
+// upload configuration & get configuration
+router.route("/getConfig").get(branchConfig);
 
 router.route("/uploadConfig").post(uploadMiddleware.single("configurationFile"), uploadConfiguration);
 
 
-
+//its path parameter
 router.route("/ownersHouse/:token").get(ownersHouse);
 router.route("/rentersHouse/:token").get(rentersHouse);
 //
